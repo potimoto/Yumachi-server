@@ -171,7 +171,7 @@ func SelectByChangeMark(RasPiID string, UUID string, w http.ResponseWriter) {
 	}
 }
 
-func Manji(w http.ResponseWriter) {
+func Reset(w http.ResponseWriter) {
 	if w != nil {
 		_, err := db.DB.Exec("delete from `appDB`.`pairing_user`") //デモ用
 		log.Println(&w)

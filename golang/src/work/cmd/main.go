@@ -15,28 +15,6 @@ import (
 
 var mark = []string{"magro", "ebi", "tamago"}
 
-/*func getDBInfo(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Get DB Info")
-	//DB.db, connectionError = sql.Open(DRIVER_NAME, DATA_SOURCE_NAME)
-	// DB の情報を取得
-	rows, err := db.DB.Query("SELECT SUBSTRING_INDEX(USER(), '@', -1) AS ip, @@hostname as hostname, @@port as port, DATABASE() as current_dtabase;")
-	if err != nil {
-		log.Print("error executing database query: ", err)
-		return
-	}
-	var buffer bytes.Buffer
-	for rows.Next() {
-		var ip string
-		var hostname string
-		var port string
-		var current_database string
-		err = rows.Scan(&ip, &hostname, &port, &current_database)
-		buffer.WriteString("IP::" + ip + "| HostName::" + hostname + "|Port::" + port + "|CurrentDatabase::" + current_database)
-	}
-	fmt.Fprint(w, buffer.String())
-	//defer db.Close()
-}*/
-
 //ユーザデータ格納
 func UserData(w http.ResponseWriter, r *http.Request) {
 	appID := r.FormValue("appID")
@@ -66,7 +44,6 @@ func RegisterPassChild(w http.ResponseWriter, r *http.Request) {
 
 //beaconのUUIDを格納
 func SetUUIDandGetMark(w http.ResponseWriter, r *http.Request) {
-	//db, connectionError = sql.Open(DRIVER_NAME, DATA_SOURCE_NAME)
 	//Post受け取り
 	appID := r.FormValue("appID")
 	UUID := r.FormValue("UUID")
@@ -83,7 +60,6 @@ func SetUUIDandGetMark(w http.ResponseWriter, r *http.Request) {
 
 //ラズパイから固有IDを受け取りとマーク送信
 func ChangeMark(w http.ResponseWriter, r *http.Request) {
-	//db.DB, connectionError = sql.Open(DRIVER_NAME, DATA_SOURCE_NAME)
 	//Post受け取り
 	RasPiID := r.FormValue("RasPiID") //ラズパイ固有ID
 	UUID := r.FormValue("UUID")       //ラズパイで受信したbeaconのUUID
@@ -95,7 +71,7 @@ func ChangeMark(w http.ResponseWriter, r *http.Request) {
 
 //できてない
 func Debug(w http.ResponseWriter, r *http.Request) {
-	repository.Manji(w)
+	repository.Reset(w)
 }
 
 func main() {
